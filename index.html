@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathfinder Admissions Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFEFB;
+    --sage: #6B8F71;
+    --sage-light: #EAF1EB;
+    --sage-dark: #3D5942;
+    --terracotta: #C4714A;
+    --terracotta-light: #F5EAE3;
+    --charcoal: #2C2C2A;
+    --text-mid: #5C5B58;
+    --text-muted: #8A8984;
+    --border: rgba(44,44,42,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--sage-dark);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-logo span {
+    color: var(--terracotta);
+    font-weight: 300;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    background: var(--sage);
+    color: white !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 100px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--sage-dark) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 7rem 2rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--sage-light);
+    color: var(--sage-dark);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: white;
+    padding: 0.75rem 1.75rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #b05e38; transform: translateY(-1px); }
+
+  .btn-secondary {
+    color: var(--charcoal);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .btn-secondary:hover { color: var(--terracotta); }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-card-stack {
+    position: relative;
+    width: 320px;
+    height: 340px;
+  }
+
+  .card-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 280px;
+    background: var(--sage-light);
+    border-radius: 20px;
+    height: 280px;
+    border: 1px solid rgba(107,143,113,0.2);
+  }
+
+  .card-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 290px;
+    background: var(--warm-white);
+    border-radius: 20px;
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(44,44,42,0.08);
+  }
+
+  .card-front-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .card-school {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 0.3rem;
+  }
+
+  .card-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #43A047;
+    border-radius: 50%;
+  }
+
+  .card-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1rem 0;
+  }
+
+  .card-stat-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card-stat label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .card-stat value {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+
+  .floating-badge {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    background: var(--terracotta-light);
+    border: 1px solid rgba(196,113,74,0.2);
+    border-radius: 12px;
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+    color: var(--terracotta);
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(44,44,42,0.07);
+  }
+
+  /* SOCIAL PROOF BAR */
+  .proof-bar {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+  }
+
+  .proof-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .proof-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+  }
+
+  .proof-num {
+    font-family: 'Lora', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .proof-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+  }
+
+  /* SERVICES */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5.5rem 2rem;
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.65rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+
+  .section-sub {
+    color: var(--text-mid);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .service-card:hover {
+    box-shadow: 0 6px 24px rgba(44,44,42,0.08);
+    transform: translateY(-2px);
+  }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--sage-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+    font-size: 1.25rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* PROCESS */
+  .process-section {
+    background: var(--charcoal);
+    color: white;
+    padding: 5.5rem 2rem;
+  }
+
+  .process-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .process-section .section-tag { color: #A5C4A9; }
+  .process-section .section-title { color: white; }
+  .process-section .section-sub { color: rgba(255,255,255,0.6); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    z-index: 0;
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1.25rem;
+  }
+
+  .step-num.active {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+
+  .step h4 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.4rem;
+  }
+
+  .step p {
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .testimonial-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+
+  .quote-mark {
+    font-family: 'Lora', serif;
+    font-size: 3rem;
+    color: var(--sage);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.4;
+  }
+
+  .testimonial-card blockquote {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--charcoal);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .author-info strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+
+  .author-info span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .school-tag {
+    margin-left: auto;
+    background: var(--sage-light);
+    color: var(--sage-dark);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border);
+    padding: 5.5rem 2rem;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-section .section-title { margin-bottom: 0.75rem; }
+  .cta-section .section-sub { max-width: 100%; margin: 0 auto 2rem; }
+
+  .cta-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 420px;
+    margin: 0 auto 1rem;
+  }
+
+  .cta-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-form input:focus { border-color: var(--sage); }
+  .cta-form input::placeholder { color: var(--text-muted); }
+
+  .cta-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; gap: 3rem; }
+    .hero-visual { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .proof-bar-inner { gap: 1.5rem; }
+    .proof-divider { display: none; }
+    .nav-links { display: none; }
+    .cta-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Pathfinder <span>Admissions Coaching</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">How it works</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#contact" class="nav-cta">Free consult</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">Admissions Coaching</div>
+    <h1>Your story deserves a <em>great</em> school to tell it in.</h1>
+    <p>We help students find, apply to, and get accepted into colleges that are the right fit — not just the most famous name. Personalized guidance from start to offer letter.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Book a free consultation</a>
+      <a href="#process" class="btn-secondary">See how it works →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="card-back"></div>
+      <div class="card-front">
+        <div class="card-front-label">Application Status</div>
+        <div class="card-school">University of Michigan</div>
+        <div class="card-status">Admitted</div>
+        <div class="card-divider"></div>
+        <div class="card-stat-row">
+          <div class="card-stat">
+            <label>GPA</label>
+            <value>3.7</value>
+          </div>
+          <div class="card-stat">
+            <label>SAT</label>
+            <value>1380</value>
+          </div>
+          <div class="card-stat">
+            <label>Essays</label>
+            <value>✓ Done</value>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge">🎉 3 schools accepted you!</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-bar-inner">
+    <div class="proof-item">
+      <span class="proof-num">94%</span>
+      <span>acceptance rate at<br>students' top-choice school</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">200+</span>
+      <span>students guided<br>to their dream school</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">50+</span>
+      <span>colleges in our<br>placement network</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">8 yrs</span>
+      <span>of admissions<br>expertise</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-tag">What we offer</div>
+  <h2 class="section-title">Every student gets a plan built around <em style="font-family:'Lora',serif; color:var(--terracotta); font-style:italic;">them.</em></h2>
+  <p class="section-sub">No cookie-cutter advice. We take the time to understand who you are before we help you figure out where you're going.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🗺️</div>
+      <h3>School List Strategy</h3>
+      <p>We build a balanced, personalized list of schools — reach, match, and safety — based on your goals, strengths, and what will actually make you happy.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✍️</div>
+      <h3>Essay Coaching</h3>
+      <p>Your application essays should sound like you. We help you find the story only you can tell, then polish it until it shines — without scrubbing away your voice.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <h3>Application Review</h3>
+      <p>We go through every section of your application — activities list, awards, supplementals — with fresh eyes and honest feedback before you submit.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📅</div>
+      <h3>Timeline & Deadlines</h3>
+      <p>Senior year moves fast. We keep you on track with a clear, realistic schedule so nothing falls through the cracks under pressure.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3>Interview Prep</h3>
+      <p>We run mock interviews, give detailed feedback, and help you speak confidently about yourself — so you walk in feeling ready, not rehearsed.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3>Financial Aid Guidance</h3>
+      <p>We help you understand your financial aid options and identify schools where your profile makes you a strong scholarship candidate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="process-inner">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">Simple process, <em style="font-family:'Lora',serif; font-style:italic;">real support</em></h2>
+    <p class="section-sub" style="margin-bottom:3.5rem;">We meet you where you are — whether it's sophomore year or the week before deadlines.</p>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num active">01</div>
+        <h4>Free Consultation</h4>
+        <p>We start with a relaxed 30-minute call to hear your goals, ask questions, and figure out how we can help.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Build Your Plan</h4>
+        <p>Together we put together a custom roadmap — school list, timeline, and a clear breakdown of what we'll tackle first.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Work Together</h4>
+        <p>Regular sessions, unlimited email support, and honest feedback every step of the way. You're never working alone.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Submit with Confidence</h4>
+        <p>We review everything before it goes out the door so you can hit submit feeling proud of what you've built.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="section-tag">Student stories</div>
+  <h2 class="section-title">Words from students <em style="font-family:'Lora',serif; font-style:italic; color:var(--terracotta);">we've worked with</em></h2>
+  <p class="section-sub" style="margin-bottom:2.5rem;">We keep class sizes small because these are real relationships, not transactions.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>I had no idea how to start my Common App essay. After just two sessions I had a draft I was actually proud of — something personal that still felt like it fit the prompt. Getting into my first-choice school was surreal.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#EAF1EB; color:#3D5942;">ML</div>
+        <div class="author-info">
+          <strong>Maya L.</strong>
+          <span>Class of 2024</span>
+        </div>
+        <div class="school-tag">→ NYU</div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>As a first-generation college student, I felt completely lost. Pathfinder didn't just help me with essays — they explained how the whole process worked. I finally felt like I knew what I was doing.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#F5EAE3; color:#7A3E26;">JR</div>
+        <div class="author-info">
+          <strong>James R.</strong>
+          <span>Class of 2024</span>
+        </div>
+        <div class="school-tag">→ UMich</div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>My stats weren't perfect, and I was worried I'd never get in anywhere I wanted. They helped me tell my story in a way that actually stood out. I got into 4 of my 6 schools.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#EAF1EB; color:#3D5942;">SP</div>
+        <div class="author-info">
+          <strong>Sofia P.</strong>
+          <span>Class of 2023</span>
+        </div>
+        <div class="school-tag">→ UNC Chapel Hill</div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>Honestly, my favorite part was just having someone in my corner. College applications are stressful, and knowing I could email any question and get a thoughtful response made a huge difference.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#F5EAE3; color:#7A3E26;">TK</div>
+        <div class="author-info">
+          <strong>Tyler K.</strong>
+          <span>Class of 2025</span>
+        </div>
+        <div class="school-tag">→ Boston University</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="section-tag">Let's talk</div>
+    <h2 class="section-title">Ready to start? The first conversation is always free.</h2>
+    <p class="section-sub">Drop your email and we'll reach out to schedule a no-pressure 30-minute call.</p>
+    <div class="cta-form">
+      <input type="email" placeholder="your@email.com">
+      <a href="mailto:hello@pathfinderconsulting.com" class="btn-primary">Get in touch</a>
+    </div>
+    <p class="cta-note">No spam. No commitment. Just a conversation.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Pathfinder Admissions Coaching</strong> &nbsp;·&nbsp; hello@pathfinderconsulting.com &nbsp;·&nbsp; &copy; 2025</p>
+</footer>
+
+</body>
+</html>
