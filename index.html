@@ -601,15 +601,287 @@
 
   footer strong { color: rgba(255,255,255,0.8); }
 
+  /* TEAM PREVIEW */
+  .team-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .team-preview-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .team-preview-card:hover {
+    box-shadow: 0 6px 24px rgba(44,44,42,0.08);
+    transform: translateY(-2px);
+  }
+
+  .team-preview-photo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .preview-initial {
+    font-family: 'Lora', serif;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--sage-dark);
+    opacity: 0.45;
+  }
+
+  .team-preview-body { padding: 1.25rem 1.4rem 1.5rem; }
+
+  .team-preview-name {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 0.2rem;
+  }
+
+  .team-preview-school {
+    font-size: 0.78rem;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.01em;
+  }
+
+  .team-preview-bio {
+    font-size: 0.875rem;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  .btn-secondary-outline {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--charcoal);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    padding: 0.65rem 1.5rem;
+    border-radius: 100px;
+    background: var(--warm-white);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary-outline:hover {
+    border-color: var(--sage);
+    background: var(--sage-light);
+    color: var(--sage-dark);
+  }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 1.75rem 1.75rem;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .pricing-card:hover {
+    box-shadow: 0 8px 28px rgba(44,44,42,0.09);
+    transform: translateY(-2px);
+  }
+
+  .pricing-card.featured {
+    border: 2px solid var(--sage);
+    background: var(--warm-white);
+  }
+
+  .pricing-popular {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sage);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.85rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .pricing-name {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 0.3rem;
+  }
+
+  .pricing-tagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .pricing-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .price-dollar {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-top: 0.3rem;
+  }
+
+  .price-amount {
+    font-family: 'Lora', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+
+  .price-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    align-self: flex-end;
+    padding-bottom: 0.2rem;
+  }
+
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.45;
+  }
+
+  .check-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    font-size: 0.6rem;
+    color: var(--sage-dark);
+  }
+
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .pricing-cta-outline {
+    border: 1px solid var(--border);
+    color: var(--charcoal);
+    background: transparent;
+  }
+
+  .pricing-cta-outline:hover {
+    border-color: var(--sage);
+    background: var(--sage-light);
+    color: var(--sage-dark);
+  }
+
+  .pricing-cta-filled {
+    background: var(--sage);
+    color: white;
+    border: 1px solid var(--sage);
+  }
+
+  .pricing-cta-filled:hover {
+    background: var(--sage-dark);
+    border-color: var(--sage-dark);
+  }
+
+  .hourly-note {
+    margin-top: 2.5rem;
+    text-align: center;
+    padding: 1.25rem 1.75rem;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hourly-note p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .hourly-note strong {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  .hourly-link {
+    font-size: 0.88rem;
+    color: var(--terracotta);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .hourly-link:hover { text-decoration: underline; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; gap: 3rem; }
     .hero-visual { display: none; }
     .services-grid { grid-template-columns: 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .proof-bar-inner { gap: 1.5rem; }
-    .proof-divider { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .team-preview-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .cta-form { flex-direction: column; }
   }
@@ -622,8 +894,9 @@
   <a href="#" class="nav-logo">Pathfinder <span>Admissions Coaching</span></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#process">How it works</a></li>
-    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="about.html">Our team</a></li>
     <li><a href="#contact" class="nav-cta">Free consult</a></li>
   </ul>
 </nav>
@@ -632,8 +905,8 @@
 <section class="hero">
   <div>
     <div class="hero-tag">Admissions Coaching</div>
-    <h1>Your story deserves a <em>great</em> school to tell it in.</h1>
-    <p>We help students find, apply to, and get accepted into colleges that are the right fit — not just the most famous name. Personalized guidance from start to offer letter.</p>
+    <h1>Get your child into the <em>right</em> college — with a team that knows how.</h1>
+    <p>We work with driven students and their families to build a focused, strategic application — school selection, essays, interviews, and everything in between. From first draft to decision day.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Book a free consultation</a>
       <a href="#process" class="btn-secondary">See how it works →</a>
@@ -667,31 +940,6 @@
   </div>
 </section>
 
-<!-- PROOF BAR -->
-<div class="proof-bar">
-  <div class="proof-bar-inner">
-    <div class="proof-item">
-      <span class="proof-num">94%</span>
-      <span>acceptance rate at<br>students' top-choice school</span>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-item">
-      <span class="proof-num">200+</span>
-      <span>students guided<br>to their dream school</span>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-item">
-      <span class="proof-num">50+</span>
-      <span>colleges in our<br>placement network</span>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-item">
-      <span class="proof-num">8 yrs</span>
-      <span>of admissions<br>expertise</span>
-    </div>
-  </div>
-</div>
-
 <!-- SERVICES -->
 <section class="section" id="services">
   <div class="section-tag">What we offer</div>
@@ -712,21 +960,6 @@
       <div class="service-icon">📋</div>
       <h3>Application Review</h3>
       <p>We go through every section of your application — activities list, awards, supplementals — with fresh eyes and honest feedback before you submit.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">📅</div>
-      <h3>Timeline & Deadlines</h3>
-      <p>Senior year moves fast. We keep you on track with a clear, realistic schedule so nothing falls through the cracks under pressure.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">💬</div>
-      <h3>Interview Prep</h3>
-      <p>We run mock interviews, give detailed feedback, and help you speak confidently about yourself — so you walk in feeling ready, not rehearsed.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🎯</div>
-      <h3>Financial Aid Guidance</h3>
-      <p>We help you understand your financial aid options and identify schools where your profile makes you a strong scholarship candidate.</p>
     </div>
   </div>
 </section>
@@ -762,60 +995,117 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="section" id="testimonials">
-  <div class="section-tag">Student stories</div>
-  <h2 class="section-title">Words from students <em style="font-family:'Lora',serif; font-style:italic; color:var(--terracotta);">we've worked with</em></h2>
-  <p class="section-sub" style="margin-bottom:2.5rem;">We keep class sizes small because these are real relationships, not transactions.</p>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <blockquote>I had no idea how to start my Common App essay. After just two sessions I had a draft I was actually proud of — something personal that still felt like it fit the prompt. Getting into my first-choice school was surreal.</blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#EAF1EB; color:#3D5942;">ML</div>
-        <div class="author-info">
-          <strong>Maya L.</strong>
-          <span>Class of 2024</span>
-        </div>
-        <div class="school-tag">→ NYU</div>
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-tag">Packages</div>
+  <h2 class="section-title">Simple, transparent <em style="font-family:'Lora',serif; color:var(--terracotta); font-style:italic;">pricing.</em></h2>
+  <p class="section-sub">Pick the level of support that fits where your student is in the process. Every package includes a free 30-minute intro call.</p>
+
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="pricing-card">
+      <div class="pricing-name">Starter</div>
+      <div class="pricing-tagline">For students who need focused help on one area.</div>
+      <div class="pricing-price">
+        <span class="price-dollar">$</span>
+        <span class="price-amount">200</span>
+      </div>
+      <ul class="pricing-features">
+        <li><span class="check-icon">✓</span>3 one-hour coaching sessions</li>
+        <li><span class="check-icon">✓</span>School list review & strategy</li>
+        <li><span class="check-icon">✓</span>Email support between sessions</li>
+        <li><span class="check-icon">✓</span>Free 30-min intro call</li>
+      </ul>
+      <a href="#contact" class="pricing-cta pricing-cta-outline">Get started</a>
+    </div>
+
+    <!-- INTERVIEW READY -->
+    <div class="pricing-card featured">
+      <div class="pricing-popular">Most focused</div>
+      <div class="pricing-name">Interview Ready</div>
+      <div class="pricing-tagline">Targeted prep for students heading into interviews.</div>
+      <div class="pricing-price">
+        <span class="price-dollar">$</span>
+        <span class="price-amount">250</span>
+      </div>
+      <ul class="pricing-features">
+        <li><span class="check-icon">✓</span>2 one-hour coaching sessions</li>
+        <li><span class="check-icon">✓</span>Full mock interview with feedback</li>
+        <li><span class="check-icon">✓</span>Interview strategy & question prep</li>
+        <li><span class="check-icon">✓</span>Insider insight from a Duke alumni interviewer</li>
+        <li><span class="check-icon">✓</span>Free 30-min intro call</li>
+      </ul>
+      <a href="#contact" class="pricing-cta pricing-cta-filled">Get started</a>
+    </div>
+
+    <!-- FULL APPLICATION -->
+    <div class="pricing-card">
+      <div class="pricing-name">Full Application</div>
+      <div class="pricing-tagline">End-to-end support from strategy to submit.</div>
+      <div class="pricing-price">
+        <span class="price-dollar">$</span>
+        <span class="price-amount">500</span>
+      </div>
+      <ul class="pricing-features">
+        <li><span class="check-icon">✓</span>5 one-hour coaching sessions</li>
+        <li><span class="check-icon">✓</span>Full mock interview with feedback</li>
+        <li><span class="check-icon">✓</span>Essay review session (Common App + supplements)</li>
+        <li><span class="check-icon">✓</span>School list & application strategy</li>
+        <li><span class="check-icon">✓</span>Timeline & deadline planning</li>
+        <li><span class="check-icon">✓</span>Email support throughout</li>
+        <li><span class="check-icon">✓</span>Free 30-min intro call</li>
+      </ul>
+      <a href="#contact" class="pricing-cta pricing-cta-outline">Get started</a>
+    </div>
+
+  </div>
+
+  <div class="hourly-note">
+    <p>Prefer to book sessions individually? We offer <strong>hourly coaching at $65/hr</strong> — no package required.</p>
+    <a href="#contact" class="hourly-link">Book a single session →</a>
+  </div>
+</section>
+
+<!-- MEET THE TEAM -->
+<section class="section" id="team">
+  <div class="section-tag">Who we are</div>
+  <h2 class="section-title">Founded by students who've <em style="font-family:'Lora',serif; color:var(--terracotta); font-style:italic;">been there.</em></h2>
+  <p class="section-sub">We're not a faceless agency. We're three recent students — Princeton, Duke, and UF — who went through this process and built the resource we wish we'd had.</p>
+  <div class="team-preview-grid">
+    <div class="team-preview-card">
+      <div class="team-preview-photo" style="background:var(--sage-light);">
+        <span class="preview-initial">C</span>
+      </div>
+      <div class="team-preview-body">
+        <div class="team-preview-name">Connor</div>
+        <div class="team-preview-school">Princeton '24 · Valedictorian</div>
+        <p class="team-preview-bio">Specializes in essays and Ivy-level application strategy.</p>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <blockquote>As a first-generation college student, I felt completely lost. Pathfinder didn't just help me with essays — they explained how the whole process worked. I finally felt like I knew what I was doing.</blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#F5EAE3; color:#7A3E26;">JR</div>
-        <div class="author-info">
-          <strong>James R.</strong>
-          <span>Class of 2024</span>
-        </div>
-        <div class="school-tag">→ UMich</div>
+    <div class="team-preview-card">
+      <div class="team-preview-photo" style="background:var(--terracotta-light);">
+        <span class="preview-initial">J</span>
+      </div>
+      <div class="team-preview-body">
+        <div class="team-preview-name">Jinzi</div>
+        <div class="team-preview-school">Phillips Andover · Duke Interviewer</div>
+        <p class="team-preview-bio">5+ years interviewing Duke applicants. Knows what committees look for.</p>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <blockquote>My stats weren't perfect, and I was worried I'd never get in anywhere I wanted. They helped me tell my story in a way that actually stood out. I got into 4 of my 6 schools.</blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#EAF1EB; color:#3D5942;">SP</div>
-        <div class="author-info">
-          <strong>Sofia P.</strong>
-          <span>Class of 2023</span>
-        </div>
-        <div class="school-tag">→ UNC Chapel Hill</div>
+    <div class="team-preview-card">
+      <div class="team-preview-photo" style="background:#EEE8F5;">
+        <span class="preview-initial" style="color:#5C3A8A;">M</span>
+      </div>
+      <div class="team-preview-body">
+        <div class="team-preview-name">Melissa</div>
+        <div class="team-preview-school">University of Florida · Senior</div>
+        <p class="team-preview-bio">Expert in financial aid, scholarships, and first-gen applicant support.</p>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="quote-mark">"</div>
-      <blockquote>Honestly, my favorite part was just having someone in my corner. College applications are stressful, and knowing I could email any question and get a thoughtful response made a huge difference.</blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#F5EAE3; color:#7A3E26;">TK</div>
-        <div class="author-info">
-          <strong>Tyler K.</strong>
-          <span>Class of 2025</span>
-        </div>
-        <div class="school-tag">→ Boston University</div>
-      </div>
-    </div>
+  </div>
+  <div style="text-align:center; margin-top:2.5rem;">
+    <a href="about.html" class="btn-secondary-outline">Meet the full team →</a>
   </div>
 </section>
 
